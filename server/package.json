@@ -2,7 +2,8 @@
   "name": "pollster-server",
   "version": "1.0.0",
   "description": "",
-  "main": "dist/index.js",
+  "main": "dist/index",
+  "typings": "dist/index",
   "scripts": {
     "clean": "rimraf dist/*",
     "copy-assets": "ts-node tools/copyAssets",
@@ -34,7 +35,6 @@
     "@types/node": "^10.12.21",
     "@types/shelljs": "^0.8.2",
     "fs-extra": "^7.0.1",
-    "nodemon": "^1.18.9",
     "npm-run-all": "^4.1.5",
     "rimraf": "^2.6.3",
     "shelljs": "^0.8.3",
@@ -43,7 +43,12 @@
     "typescript": "^3.3.1"
   },
   "dependencies": {
+    "@types/mongoose": "^5.3.12",
+    "body-parser": "^1.18.3",
     "ejs": "^2.6.1",
-    "express": "^4.16.4"
+    "express": "^4.16.4",
+    "mongoose": "^5.4.9",
+    "nodemon": "^1.18.9",
+    "random-words": "^1.1.0"
   }
 }
