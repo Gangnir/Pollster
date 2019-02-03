@@ -8,10 +8,8 @@ export class PollRoutes {
         app.route("/poll")
         .post(this.pollController.createPoll);
 
-        app.route("/poll/:key")
-        .get(this.pollController.getPoll);
-
         app.route("/poll/:pollId")
+        .get(this.pollController.getPoll)
         .delete(this.pollController.deletePoll)
         .post(this.pollController.updatePoll);
 

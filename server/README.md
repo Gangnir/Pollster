@@ -10,6 +10,7 @@ To run:
 
 * GET /poll/:key
 
+* GET /poll/:pollId
 * POST /poll/:pollId
 * DELETE /poll/:pollId
 

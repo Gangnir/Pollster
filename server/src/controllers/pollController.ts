@@ -23,7 +23,11 @@ export class PollController {
 
     public getPoll(req: Request, res: Response) {
         Poll.find({
-            key: req.params.key
+            $or: [{
+                key: req.params.pollId
+            }, {
+                _id: req.params.pollId
+            }]
         }, (err, poll) => {
             return err ? res.send(err) : res.json(poll);
         });
