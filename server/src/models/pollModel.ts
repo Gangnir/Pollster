@@ -1,5 +1,5 @@
 import { Schema } from "mongoose";
-import * as randomWords from "random-words";
+import randomWords from "random-words";
 
 export const PollSchema = new Schema({
     title: String,
@@ -14,7 +14,7 @@ export const PollSchema = new Schema({
         unique: true,
         lowercase: true,
         default: () => {
-            return randomWords({min: 2, max: 4, join: "-"});
+            return randomWords({exactly: 4, join: "-"});
         }
     },
     settings: {
@@ -29,14 +29,20 @@ export const PollSchema = new Schema({
     },
     statements: [{
         text: String,
-        order: Number,
+        order: {
+            type: Number,
+            default: 0
+        },
         type: {
             type: String,
             enum: ["single-select", "multi-select", "free-text"]
         },
         options: [{
             text: String,
-            order: Number
+            order: {
+                type: Number,
+                default: 0
+            },
         }]
     }]
 });

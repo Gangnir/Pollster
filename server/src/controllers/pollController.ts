@@ -7,10 +7,16 @@ const Poll = model("Poll", PollSchema);
 const Reply = model("Reply", ReplySchema);
 
 export class PollController {
-    public savePoll(req: Request, res: Response) {
+    public createPoll(req: Request, res: Response) {
         const poll = new Poll(req.body);
 
         poll.save((err, result) => {
+            return err ? res.send(err) : res.json(result);
+        });
+    }
+
+    public updatePoll(req: Request, res: Response) {
+        Poll.findByIdAndUpdate(req.params.pollId, req.body, { new: true }, (err, result) => {
             return err ? res.send(err) : res.json(result);
         });
     }
@@ -24,9 +30,7 @@ export class PollController {
     }
 
     public deletePoll(req: Request, res: Response) {
-        Poll.deleteOne({
-            key: req.params.key
-        }, (err) => {
+        Poll.findByIdAndDelete(req.params.pollId, (err) => {
             return err ? res.send(err) : true;
         });
     }
@@ -35,6 +39,14 @@ export class PollController {
         const reply = new Reply(req.body);
 
         reply.save((err, result) => {
+            return err ? res.send(err) : res.json(result);
+        });
+    }
+
+    public getReplies(req: Request, res: Response) {
+        Reply.find({
+            pollId: req.params.pollId
+        }, (err, result) => {
             return err ? res.send(err) : res.json(result);
         });
     }

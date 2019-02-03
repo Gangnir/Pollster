@@ -6,11 +6,17 @@ export class PollRoutes {
 
     public routes(app: Application): void {
         app.route("/poll")
-        .post(this.pollController.savePoll);
+        .post(this.pollController.createPoll);
 
         app.route("/poll/:key")
-        .get(this.pollController.getPoll)
+        .get(this.pollController.getPoll);
+
+        app.route("/poll/:pollId")
         .delete(this.pollController.deletePoll)
-        .put(this.pollController.submitReply);
+        .post(this.pollController.updatePoll);
+
+        app.route("/poll/:pollId/reply")
+        .get(this.pollController.getReplies)
+        .post(this.pollController.submitReply);
     }
 }

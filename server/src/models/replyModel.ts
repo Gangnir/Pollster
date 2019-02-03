@@ -9,6 +9,6 @@ export const ReplySchema = new Schema({
     statementReplies: [{
         statementId: String,
         text: String,
-        options: []
+        optionIds: []
     }]
 });
