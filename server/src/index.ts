@@ -1,20 +1,7 @@
-import express from "express";
-import path from "path";
-const app = express();
-const port = 8080; // default port to listen
+import app from "./app";
+const PORT = 3000;
 
-// Configure Express to use EJS
-app.set( "views", path.join( __dirname, "views" ) );
-app.set( "view engine", "ejs" );
-
-// define a route handler for the default home page
-app.get( "/", ( req, res ) => {
-    // render the index template
-    res.render( "index" );
-} );
-
-// start the express server
-app.listen( port, () => {
+app.listen(PORT, () => {
     // tslint:disable-next-line:no-console
-    console.log( `server started at http://localhost:${ port }` );
-} );
+    console.log( `Server started at http://localhost:${ PORT }` );
+});
