@@ -13,15 +13,14 @@ export class PollController {
             const poll = new Poll(req.body);
 
             poll.save((err, result) => {
-                if (err) {
-                    LogHelper.logError(err);
-                    return res.send(err);
-                }
+                if (err) { throw err; }
 
+                LogHelper.logDebug("Result for PollController.submitReply with body " +
+                    JSON.stringify(req.body) + "\t|\t" + JSON.stringify(result));
                 return res.json(result);
             });
         } catch (error) {
-            LogHelper.logError(error);
+            LogHelper.logError(error, "Error at PollController.createPoll");
             return res.json(null);
         }
 
@@ -30,15 +29,15 @@ export class PollController {
     public updatePoll(req: Request, res: Response) {
         try {
             Poll.findByIdAndUpdate(req.params.pollId, req.body, { new: true }, (err, result) => {
-                if (err) {
-                    LogHelper.logError(err);
-                    return res.send(err);
-                }
+                if (err) { throw err; }
 
+                LogHelper.logDebug("Result for PollController.deletePoll with params " +
+                    JSON.stringify(req.params) + "and body" +
+                    JSON.stringify(req.body) + "\t|\t" + JSON.stringify(result));
                 return res.json(result);
             });
         } catch (error) {
-            LogHelper.logError(error);
+            LogHelper.logError(error, "Error at PollController.updatePoll");
             return res.json(null);
         }
     }
@@ -50,15 +49,14 @@ export class PollController {
             condition[key] = req.params.pollId;
 
             Poll.findOne(condition, (err, result) => {
-                if (err) {
-                    LogHelper.logError(err);
-                    return res.send(err);
-                }
-                LogHelper.logDebug(JSON.stringify(result));
+                if (err) { throw err; }
+
+                LogHelper.logDebug("Result for PollController.getPoll with params " +
+                    JSON.stringify(condition) + "\t|\t" + JSON.stringify(result));
                 return res.json(result);
             });
         } catch (error) {
-            LogHelper.logError(error);
+            LogHelper.logError(error, "Error at PollController.getPoll");
             return res.json(null);
         }
     }
@@ -66,15 +64,14 @@ export class PollController {
     public deletePoll(req: Request, res: Response) {
         try {
             Poll.findByIdAndDelete(req.params.pollId, (err, result) => {
-                if (err) {
-                    LogHelper.logError(err);
-                    return res.send(err);
-                }
+                if (err) { throw err; }
 
+                LogHelper.logDebug("Result for PollController.deletePoll with params " +
+                    JSON.stringify(req.params) + "\t|\t" + JSON.stringify(result));
                 return res.json(result);
             });
         } catch (error) {
-            LogHelper.logError(error);
+            LogHelper.logError(error, "Error at PollController.deletePoll");
             return res.json(false);
         }
     }
@@ -84,15 +81,14 @@ export class PollController {
             const reply = new Reply(req.body);
 
             reply.save((err, result) => {
-                if (err) {
-                    LogHelper.logError(err);
-                    return res.send(err);
-                }
+                if (err) { throw err; }
 
+                LogHelper.logDebug("Result for PollController.submitReply with body " +
+                    JSON.stringify(req.body) + "\t|\t" + JSON.stringify(result));
                 return res.json(result);
             });
         } catch (error) {
-            LogHelper.logError(error);
+            LogHelper.logError(error, "Error at PollController.submitReply");
             return res.json(null);
         }
     }
@@ -102,15 +98,14 @@ export class PollController {
             Reply.find({
                 pollId: req.params.pollId
             }, (err, result) => {
-                if (err) {
-                    LogHelper.logError(err);
-                    return res.send(err);
-                }
+                if (err) { throw err; }
 
+                LogHelper.logDebug("Result for PollController.getReplies with params " +
+                    JSON.stringify(req.params) + "\t|\t" + JSON.stringify(result));
                 return res.json(result);
             });
         } catch (error) {
-            LogHelper.logError(error);
+            LogHelper.logError(error, "Error at PollController.getReplies");
             return res.json(null);
         }
     }

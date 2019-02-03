@@ -11,7 +11,7 @@ export class LogHelper {
 
     public static logError(error: any, message?: string) {
         this.initialize();
-        this.logger.error(`${message || "-"} | ${error || "-"}`);
+        this.logger.error(`${message || "An error was thrown"}\n    ${error.stack || "-"}`);
     }
 
     public static logDebug(message: string) {
@@ -40,16 +40,14 @@ export class LogHelper {
                 format.timestamp({
                     format: "YYYY-MM-DD HH:mm:ss:SSS"
                 }),
-                format.printf((info) => `${info.timestamp} | ${info.level} | ${info.message}`)
+                format.printf((info) => `${info.timestamp}\t|\t${info.level.toUpperCase()}\t|\t${info.message}`)
             ),
             transports: [
                 new transports.Console({
                     level: "info",
                     format: format.combine(
                         format.colorize(),
-                        format.printf(
-                          (info) => `${info.timestamp} | ${info.level} | ${info.message}`
-                        )
+                        format.printf((info) => `LOGGER: ${info.timestamp}\t|\t${info.level}\t|\t${info.message}`)
                     )
                 }),
                 new transports.File({filename})
