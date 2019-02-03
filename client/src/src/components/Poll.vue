@@ -12,6 +12,8 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
+import axios from 'axios'
+import VueAxios from 'vue-axios'
 
 @Component
 export default class Poll extends Vue {
@@ -19,10 +21,16 @@ export default class Poll extends Vue {
 
   title: string;
   poll: object;
+  test: object;
+
+  apiPath: string = 'http://localhost:3000';
+
+  info: any;
 
   constructor(){
     super();
     this.title = 'Welcome to Pollster';
+    // this.apiPath = 'http://localhost:3000';
     this.poll = {
                 title: 'My First Poll',
                 description: 'All kinds of poll yo!',
@@ -32,6 +40,37 @@ export default class Poll extends Vue {
                     default: Date.now
                 }
     };
+    this.postPoll();
+    this.test = this.getPoll;
+  }
+
+  public postPoll(){
+    console.log(this.apiPath);
+    axios.post('http://localhost:3000/poll', {
+      title: "The ultimate question",
+      description: "Oh man, this is a tough one",
+      color: "pink",
+      statements: [{
+          text: "What is the answer to the ultimate question of life, the universe and everything?",
+          type: "single-select",
+          options: [{
+              text: "41"
+          }, {
+              text: "42"
+          }, {
+              text: "43"
+          }]
+      }]
+    }).then(function (response) {
+      console.log(response);
+    }).catch(function (error) {
+      console.log(error);
+    });   
+  }
+
+  public getPoll(){
+    axios.get('http://localhost:3000/getPoll')
+    .then(response => (this.info = response))
   }
 }
 </script>
