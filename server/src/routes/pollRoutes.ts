@@ -1,10 +1,16 @@
 import {Application, NextFunction, Request, Response} from "express";
+import path from "path";
 import { PollController } from "../controllers/pollController";
 
 export class PollRoutes {
     public pollController: PollController = new PollController();
 
     public routes(app: Application): void {
+        app.route("/")
+        .get((req: Request, res: Response) => {
+            res.sendFile(path.resolve("assets", "index.html"));
+        });
+
         app.route("/poll")
         .post(this.pollController.createPoll);
 
