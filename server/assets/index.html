@@ -1,0 +1,41 @@
+<code>
+<h1>Api end points:</h1>
+
+<ul>
+    <li>
+        <h2>Create poll</h2>
+        <h3>POST /poll</h3>
+        <p>Creates a poll using the parameters specified in the request body</p>
+        <i>Returns: The created poll or NULL</i>
+    </li>
+    <li>
+        <h2>Get poll</h2>
+        <h3>GET /poll/:pollKey <i>or</i> GET /poll/:pollId</h3> 
+        <p>Finds the poll matching the specified id or key (four word-combination of random words)</p>
+        <i>Returns: The found poll or NULL</i>
+    </li>
+    <li>
+        <h2>Delete poll</h2>
+        <h3>DELETE /poll/:pollId</h3>
+        <p>Deletes the poll matching the specified id</p>
+        <i>Returns: The deleted poll or NULL</i>
+    </li>
+    <li>
+        <h2>Update poll</h2>
+        <h3>POST /poll/:pollId</h3>
+        <p>Updates the poll matching the specified id using the parameters specified in the request body</p>
+        <i>Returns: The updated poll or NULL</i>
+    </li>
+    <li>
+        <h2>Get replies</h2>
+        <h3>GET /poll/:pollId/reply</h3>
+        <p>Gets all replies for the poll matching the specified id</p>
+        <i>Returns: An array of replies or an empty array</i>
+    </li>
+    <li>
+        <h2>Submit reply</h2>
+        <h3>POST /poll/:pollId/reply</h3>
+        <p>Creates a reply for the poll matching the specified id using the parameters specified in the request body</p>
+        <i>Returns: The created reply or NULL</i>
+    </li>
+</ul>

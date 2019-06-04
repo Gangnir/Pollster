@@ -35,6 +35,7 @@ export const PollSchema = new Schema({
         },
         type: {
             type: String,
+            default: "single-select",
             enum: ["single-select", "multi-select", "free-text"]
         },
         options: [{
